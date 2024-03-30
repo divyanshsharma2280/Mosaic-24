@@ -10,10 +10,10 @@ However you should go through this code too for better understanding of the mech
 """
 
 import argparse
-parser = argparse.ArgumentParser()
-parser.add_argument("--sample",type=bool)
-parser.add_argument("--play",type=bool)
 
+parser = argparse.ArgumentParser()
+parser.add_argument("--sample", type=bool)
+parser.add_argument("--play", type=bool)
 
 
 def choose_word(filename):
@@ -22,6 +22,7 @@ def choose_word(filename):
     with open(filename, 'r') as file:
         words = file.readlines()
     return random.choice(words).strip()
+
 
 def display_word(word, guessed_letters):
     """
@@ -35,6 +36,7 @@ def display_word(word, guessed_letters):
         else:
             displayed_word += '_'
     return displayed_word
+
 
 def hangman(filename, guess_func):
     """
@@ -55,11 +57,11 @@ def hangman(filename, guess_func):
             print("You've already guessed that letter.")
             attempts_left -= 1
             print("Attempts left:", attempts_left)
-            print(' '*45)
+            print(' ' * 45)
             continue
 
         guessed_letters.append(guess)
-        
+
         if guess in word:
             print("Correct!")
         else:
@@ -73,18 +75,18 @@ def hangman(filename, guess_func):
             return
 
         print("Attempts left:", attempts_left)
-        print(' '*45)
+        print(' ' * 45)
 
     print("Out of attempts! The word was:", word)
 
+
 if __name__ == "__main__":
     args = parser.parse_args()
-    
+
     if args.play:
         hangman("training.txt", play_move)
     elif args.sample:
-        hangman("training.txt", suggest_next_letter)  
+        hangman("training.txt", suggest_next_letter)
     else:
         hangman("training.txt", suggest_next_letter_sol)
-    
-        
+
